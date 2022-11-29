@@ -13,7 +13,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 import csv
 
-x = open("/Users/hgarc/Documents/GitHub/lab---python-basico-HansGV1/data.csv", "r").readlines()
+x = open("data.csv", "r").readlines()
 x = [z.replace("\t", " ") for z in x]
 x = [z.replace("\n", "") for z in x]
 x = [z.split(" ") for z in x]
@@ -438,3 +438,5 @@ def pregunta_12():
         sum = 0
         
     return registros
+
+print(pregunta_12())
