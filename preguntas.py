@@ -11,7 +11,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import csv
 
+x = open("/Users/hgarc/Documents/GitHub/lab---python-basico-HansGV1/data.csv", "r").readlines()
+x = [z.replace("\t", " ") for z in x]
+x = [z.replace("\n", "") for z in x]
+x = [z.split(" ") for z in x]
 
 def pregunta_01():
     """
@@ -21,8 +26,12 @@ def pregunta_01():
     214
 
     """
-    return
-
+    suma = 0
+    
+    for i in [z[1] for z in x[0:]]:
+        suma += int(i)
+        
+    return suma
 
 def pregunta_02():
     """
@@ -39,8 +48,14 @@ def pregunta_02():
     ]
 
     """
-    return
-
+    registros = []
+    letras = ["A", "B", "C", "D", "E"]
+    
+    for i in letras:
+        a = [z[0].split(" ")[0] for z in x[0:]].count(i)
+        registros.append((str(i),a))
+    
+    return registros
 
 def pregunta_03():
     """
@@ -57,8 +72,18 @@ def pregunta_03():
     ]
 
     """
-    return
+    registros = []
+    letras = ["A", "B", "C", "D", "E"]
+    suma = 0
+    
+    for i in letras:
+        for ii in [z[0:2] for z in x[0:]]:
+            if ii[0] == i:
+                suma += int(ii[1])
+        registros.append((i,suma))
+        suma = 0
 
+    return registros
 
 def pregunta_04():
     """
@@ -82,7 +107,15 @@ def pregunta_04():
     ]
 
     """
-    return
+    registros = []
+    letras = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    suma = 0
+    
+    for i in letras:
+        a = [z[2].split("-")[1] for z in x[0:]].count(i)
+        registros.append((str(i),a))
+    
+    return registros
 
 
 def pregunta_05():
@@ -100,8 +133,18 @@ def pregunta_05():
     ]
 
     """
-    return
-
+    registros = []
+    letras = ["A", "B", "C", "D", "E"]
+    reg = []
+       
+    for i in letras:
+        for ii in [z[0:2] for z in x[0:]]:
+            if ii[0] == i:
+                reg.append(int(ii[1]))
+        registros.append((str(i), max(reg), min(reg)))
+        reg = []
+    
+    return registros
 
 def pregunta_06():
     """
@@ -125,8 +168,32 @@ def pregunta_06():
     ]
 
     """
-    return
-
+    registros = []
+    claves = ["aaa",
+        "bbb",
+        "ccc",
+        "ddd",
+        "eee",
+        "fff",
+        "ggg",
+        "hhh",
+        "iii",
+        "jjj"]
+    reg = []
+    regg = []
+       
+    for i in [z[4].split(",") for z in x[0:]]:
+        for ii in i:
+            reg.append(ii.split(":"))
+    
+    for i in claves:
+        for ii in reg:
+            if ii[0] == i:
+                regg.append(int(ii[1]))
+        registros.append((str(i), min(regg), max(regg)))
+        regg = []
+    
+    return registros
 
 def pregunta_07():
     """
@@ -149,8 +216,19 @@ def pregunta_07():
     ]
 
     """
-    return
-
+    registros = []
+    reg = []
+    numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    suma = 0
+    
+    for i in numeros:
+        for ii in [z[0:2] for z in x[0:]]:
+            if int(ii[1]) == i:
+                reg.append(ii[0])
+        registros.append((i,reg))
+        reg = []
+    
+    return registros
 
 def pregunta_08():
     """
@@ -174,8 +252,21 @@ def pregunta_08():
     ]
 
     """
-    return
-
+    registros = []
+    reg = []
+    numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    suma = 0
+    
+    for i in numeros:
+        for ii in [z[0:2] for z in x[0:]]:
+            if int(ii[1]) == i:
+                if not (ii[0] in reg):
+                    reg.append(ii[0])
+        reg.sort()
+        registros.append((i,reg))
+        reg = []
+    
+    return registros
 
 def pregunta_09():
     """
@@ -197,8 +288,32 @@ def pregunta_09():
     }
 
     """
-    return
-
+    registros = {}
+    claves = ["aaa",
+        "bbb",
+        "ccc",
+        "ddd",
+        "eee",
+        "fff",
+        "ggg",
+        "hhh",
+        "iii",
+        "jjj"]
+    reg = []
+    sum = 0
+       
+    for i in [z[4].split(",") for z in x[0:]]:
+        for ii in i:
+            reg.append(ii.split(":"))
+    
+    for i in claves:
+        for ii in reg:
+            if ii[0] == i:
+                sum += 1       
+        registros[str(i)] = sum
+        sum = 0
+    
+    return registros
 
 def pregunta_10():
     """
@@ -218,8 +333,20 @@ def pregunta_10():
 
 
     """
-    return
-
+    c1 = [z[0].split(",") for z in x[0:]]
+    c4 = [z[3].split(",") for z in x[0:]]
+    c5 = [z[4].split(",") for z in x[0:]]
+    
+    registros = []
+    letras = ["A", "B", "C", "D", "E"]
+    
+    c = 0
+    
+    for i in c1:
+        registros.append((i[0], len(c4[c]), len(c5[c])))
+        c += 1
+    
+    return registros
 
 def pregunta_11():
     """
@@ -239,8 +366,30 @@ def pregunta_11():
 
 
     """
-    return
-
+    registros = {}
+    letras = ["a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g"]
+    
+    a = [z[1:4] for z in x[0:]]
+    b = []
+    sum = 0
+    
+    for i in a:
+        b.append([i[0],i[2]])
+    
+    for i in letras:
+        for ii in b:
+            if i in ii[1]:
+                sum += int(ii[0])
+        registros[i] = sum
+        sum = 0
+    
+    return registros
 
 def pregunta_12():
     """
@@ -257,4 +406,35 @@ def pregunta_12():
     }
 
     """
-    return
+    registros = {}
+    letras = ["A",
+        "B",
+        "C",
+        "D",
+        "E"]
+    
+    b = []
+    c = []
+    sum = 0
+    co = 0
+    t = []
+    
+    for i in [z[4].split(",") for z in x[0:]]:
+        for ii in range(0, len(i)):
+            c.append(i[ii].split(":"))
+        b.append(c)
+        c = []
+    
+    for i in [z[0] for z in x[0:]]:
+        t.append([i[0],b[co]])
+        co += 1
+        
+    for i in letras:
+        for ii in t:
+            if ii[0] == i:
+                for iii in ii[1]:
+                    sum += int(iii[1])
+        registros[i] = sum
+        sum = 0
+        
+    return registros
